@@ -6,7 +6,12 @@
       <span :style="{ 'background-color': colorMenuBtn }"></span>
       <span :style="{ 'background-color': colorMenuBtn }"></span>
     </label>
-    <ul id="menu" class="menu" :class="{ show: isShowMenu, hide: !isShowMenu }">
+    <ul
+      id="menu"
+      class="menu"
+      :class="{ show: isShowMenu, hide: !isShowMenu }"
+      :style="{ 'background-color': backgroundColorMenu }"
+    >
       <NuxtLink :to="{ path: '/' }" class="menu-logo">
         <img :src="logo.url" :alt="logo.alt" />
       </NuxtLink>
@@ -45,7 +50,11 @@
       >
         <a href="#page5">Контакты</a>
       </li>
-      <li><NuxtLink :to="{ name: 'articles' }">Блог</NuxtLink></li>
+      <li
+        :class="{ active: this.$router.history.current.path === '/articles' }"
+      >
+        <NuxtLink :to="{ name: 'articles' }">Блог</NuxtLink>
+      </li>
       <li class="address">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +81,8 @@ export default {
   data() {
     return {
       isShowMenu: false,
-      colorMenuBtn: "#ffffff"
+      colorMenuBtn: "#ffffff",
+      backgroundColorMenu: "#2a3d7a"
     };
   },
   computed: {

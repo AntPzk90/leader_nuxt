@@ -76,13 +76,6 @@ export default {
 </script>
 
 <style lang="scss">
-body {
-  font-family: "Fira Sans Condensed", sans-serif;
-  font-weight: 400;
-  margin: 0;
-  min-height: 100vh;
-}
-
 label span {
   background: #fff;
   border-radius: 10px;
@@ -202,6 +195,12 @@ input[type="checkbox"]:checked ~ span:nth-of-type(3) {
     @media screen and (max-width: 1024px) {
       font-size: 2.5vh;
     }
+  }
+}
+
+.active {
+  a {
+    color: crimson;
   }
 }
 
