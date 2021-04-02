@@ -12,14 +12,14 @@
         v-for="(photo, index) in photosItem"
         :key="index"
       >
-        <div class="slide__img-wrapper" v-if="show">
+        <div class="slide__img-wrapper" v-show="show">
           <img
             :src="photo.gallery_img.url"
             :alt="photo.gallery_img.alt"
-            v-if="show"
+            v-show="show"
             @click="showFullPicture(photo.gallery_img.url)"
           />
-          <p v-if="show">
+          <p v-show="show">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi,
             eius unde quisquam consequatur voluptates dolorum ab vitae
           </p>
@@ -29,7 +29,7 @@
     <transition enter-active-class="fadeIn" leave-active-class="fadeOut">
       <div
         class="gallery-screen__pop-up"
-        v-if="isShowFullPhoto"
+        v-show="isShowFullPhoto"
         @click="isShowFullPhoto = false"
       >
         <button class="gallery-screen__pop-up-close"></button>

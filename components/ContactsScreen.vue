@@ -5,14 +5,14 @@
         enter-active-class="bounceInDown"
         leave-active-class="bounceOutDown"
       >
-        <h4 v-if="show">Контакты</h4>
+        <h4 v-show="show">Контакты</h4>
       </transition>
       <ul>
         <transition
           enter-active-class="bounceInLeft"
           leave-active-class="bounceOutLeft"
         >
-          <li v-if="show">
+          <li v-show="show">
             <span>Тел :</span>
             <span>{{ tel }}</span>
           </li>
@@ -21,9 +21,18 @@
           enter-active-class="bounceInRight"
           leave-active-class="bounceOutRight"
         >
-          <li v-if="show">
+          <li v-show="show">
             <span>Адрес :</span>
             <span>{{ address }}</span>
+          </li>
+        </transition>
+        <transition
+          enter-active-class="bounceInRight"
+          leave-active-class="bounceOutRight"
+        >
+          <li v-show="show">
+            <span>Вр. работы :</span>
+            <p v-html="workTime"></p>
           </li>
         </transition>
       </ul>
@@ -31,7 +40,7 @@
         enter-active-class="bounceInUp"
         leave-active-class="bounceOutDown"
       >
-        <div class="social" v-if="show">
+        <div class="social" v-show="show">
           <a
             v-for="(instLink, index) in instLinks"
             :href="`http://instagram.com/_u/${instLink.link}/`"
@@ -93,7 +102,8 @@ export default {
       activeScreen: state => state.mainContent.activeScreen,
       instLinks: state => state.mainContent.data.inst,
       address: state => state.mainContent.data.address,
-      tel: state => state.mainContent.data.tel
+      tel: state => state.mainContent.data.tel,
+      workTime: state => state.mainContent.data.work_time
     })
   },
   mounted() {
@@ -114,6 +124,7 @@ export default {
   height: 100%;
   background-color: $bg-color;
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
 
@@ -198,6 +209,13 @@ export default {
         }
       }
     }
+
+    p {
+      margin: 0;
+      @media screen and (max-width: 1024px) {
+        text-align: center;
+      }
+    }
   }
 
   .social {
@@ -246,7 +264,7 @@ export default {
 
   @media screen and (max-width: 1024px) {
     width: 100%;
-    height: 50%;
+    height: 40%;
   }
 
   iframe {

@@ -7,13 +7,13 @@
           enter-active-class="bounceInRight"
           leave-active-class="bounceOutRight"
         >
-          <h3 class="info-screen__title" v-if="show">{{ title1 }}</h3>
+          <h3 class="info-screen__title" v-show="show">{{ title1 }}</h3>
         </transition>
         <transition
           enter-active-class="bounceInUp"
           leave-active-class="bounceOutRight"
         >
-          <p class="info-screen__txt" v-if="show">
+          <p class="info-screen__txt" v-show="show">
             {{ txt1 }}
           </p>
         </transition>
@@ -26,13 +26,13 @@
           enter-active-class="bounceInLeft"
           leave-active-class="bounceOutRight"
         >
-          <h3 class="info-screen__title" v-if="show">{{ title2 }}</h3>
+          <h3 class="info-screen__title" v-show="show">{{ title2 }}</h3>
         </transition>
         <transition
           enter-active-class="bounceInDown"
           leave-active-class="bounceOutLeft"
         >
-          <p class="info-screen__txt" v-if="show">
+          <p class="info-screen__txt" v-show="show">
             {{ txt2 }}
           </p>
         </transition>
