@@ -1,9 +1,33 @@
 $white: #ffffff;
 $bg-color: #2a3d7a;
 
+
 body {
   font-family: "Fira Sans Condensed", sans-serif;
   font-weight: 400;
   margin: 0;
   min-height: 100vh;
+  background-color: $white;
+  overflow-x: hidden;
+
+  /* Works on Firefox */
+  &* {
+    scrollbar-width: thin;
+    scrollbar-color: $bg-color;
+  }
+
+  /* Works on Chrome, Edge, and Safari */
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #eee;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $bg-color;
+    border-radius: 20px;
+    border: 3px solid $bg-color;
+  }
 }

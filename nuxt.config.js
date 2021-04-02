@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "wp_nuxt",
+    title: "Бк Лидер",
     htmlAttrs: {
       lang: "en"
     },
@@ -38,7 +38,7 @@ export default {
   buildModules: ["@nuxt/components"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources", "nuxt-fullpage.js"],
 
   styleResources: {
     scss: ["./assets/scss/*.scss"]
@@ -47,7 +47,9 @@ export default {
   axios: {
     baseURL: "http://leader/wp-json/acf/v3",
     timeout: 5000,
-    withCredentials: true
+    headers: {
+      "Content-Type": "application/json"
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -60,5 +62,7 @@ export default {
     duration: 2000,
     continuous: true,
     css: true
-  }
+  },
+  ssr: true,
+  target: "static"
 };

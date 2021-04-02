@@ -10,7 +10,7 @@
           enter-active-class="zoomInLeft"
           leave-active-class="zoomOutLeft"
         >
-          <h1 v-if="show">
+          <h1 v-show="show">
             {{ title }}<br /><span>{{ colorWord }}</span>
           </h1>
         </transition>
@@ -18,12 +18,9 @@
           enter-active-class="zoomInLeft"
           leave-active-class="zoomOutLeft"
         >
-          <p v-if="show">{{ slogan }}</p>
+          <p v-show="show">{{ slogan }}</p>
         </transition>
       </div>
-    </div>
-    <div v-else>
-      loading
     </div>
   </div>
 </template>
@@ -49,6 +46,9 @@ export default {
     })
   },
   mounted() {
+    this.$store.commit("mainContent/changeActiveScreen", {
+      anchor: "page1"
+    });
     this.show = true;
     this.$store.watch(
       state => state.mainContent.activeScreen,
