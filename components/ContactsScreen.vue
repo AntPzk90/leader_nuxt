@@ -110,7 +110,7 @@ export default {
     this.$store.watch(
       state => state.mainContent.activeScreen,
       () => {
-        this.activeScreen === "page5"
+        this.activeScreen === "contacts"
           ? (this.show = true)
           : (this.show = false);
       }

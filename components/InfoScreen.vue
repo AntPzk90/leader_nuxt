@@ -67,7 +67,7 @@ export default {
     this.$store.watch(
       state => state.mainContent.activeScreen,
       () => {
-        this.activeScreen === "page2"
+        this.activeScreen === "about-us"
           ? (this.show = true)
           : (this.show = false);
       }

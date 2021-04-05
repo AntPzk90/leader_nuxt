@@ -48,7 +48,7 @@
           >
             <li v-show="show">
               <span>Вр. раб.:</span>
-              <p v-html="workTime"></p>
+              <div v-html="workTime"></div>
             </li>
           </transition>
         </ul>

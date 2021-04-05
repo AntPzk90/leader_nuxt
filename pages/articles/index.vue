@@ -4,16 +4,16 @@
     <div class="articles-page">
       <div class="articles-page__top">
         <transition
-          enter-active-class="bounceInDown"
-          leave-active-class="bounceOutDown"
-        >
-          <h1 v-if="show">Блог</h1>
-        </transition>
-        <transition
           enter-active-class="bounceInUp"
           leave-active-class="bounceOutUp"
         >
-          <p class="articles-page__slogan" v-if="show">
+          <h1 v-show="show">Блог</h1>
+        </transition>
+        <transition
+          enter-active-class="bounceInDown"
+          leave-active-class="bounceOutDown"
+        >
+          <p class="articles-page__slogan" v-show="show">
             Всё самое интересное для боксёров, собрано здесь.
           </p>
         </transition>
@@ -24,7 +24,7 @@
             enter-active-class="bounceInLeft"
             leave-active-class="bounceOutLeft"
           >
-            <ul class="breadcrumbs breadcrumbs--articles-page" v-if="show">
+            <ul class="breadcrumbs breadcrumbs--articles-page" v-show="show">
               <li><NuxtLink :to="{ path: '/' }">Главная</NuxtLink></li>
               <li>блог</li>
             </ul>
@@ -72,8 +72,7 @@
 
         <transition-group
           class="articles-page__categories-list"
-          v-show="show"
-          v-if="showCategories"
+          v-show="show && showCategories"
           enter-active-class="bounceInRight"
           leave-active-class="bounceOutLeft"
           appear
@@ -108,10 +107,11 @@
           ></AppArticlePreview>
         </transition-group>
         <AppPaginate
-          v-if="showPaginate"
+          v-show="showPaginate"
           :page-count="pageCount"
           :initial-page="initialPage"
           @clickOnPaginateLink="changePaginationPage"
+          :key="activeCategory"
         />
       </div>
     </div>
@@ -134,17 +134,6 @@ export default {
     AppFooter,
     AppPaginate
   },
-  async asyncData({ store, error }) {
-    await store.dispatch("mainContent/getMainContentAction", {
-      apiUrl: "/posts/76"
-    });
-    await store.dispatch("blog/getBlogMetaAction", {
-      apiUrl: "/posts/177"
-    });
-    await store.dispatch("blog/getArticlesAction", {
-      apiUrl: "articles/?per_page=100"
-    });
-  },
   head() {
     return {
       title: this.seo.meta_title,
@@ -156,6 +145,17 @@ export default {
         }
       ]
     };
+  },
+  async asyncData({ store, error }) {
+    await store.dispatch("mainContent/getMainContentAction", {
+      apiUrl: "/posts/76"
+    });
+    await store.dispatch("blog/getBlogMetaAction", {
+      apiUrl: "/posts/177"
+    });
+    await store.dispatch("blog/getArticlesAction", {
+      apiUrl: "articles/?per_page=100"
+    });
   },
   data() {
     return {
@@ -173,15 +173,6 @@ export default {
       categories: state => state.blog.categories,
       seo: state => state.blog.seo
     }),
-    pageCount() {
-      if (this.articles) {
-        return Math.ceil(this.articles.length);
-      }
-      return 1;
-    },
-    paginationLink() {
-      return this.$route.query.params.page;
-    },
     filteredArticles() {
       if (this.activeCategory === "Все категории") {
         return this.articles;
@@ -197,6 +188,12 @@ export default {
       }
       return [];
     },
+    pageCount() {
+      if (this.articles) {
+        return Math.ceil(this.filteredArticles.length);
+      }
+      return 1;
+    },
     showPaginate() {
       return this.filteredArticles.length > 1 ? true : false;
     }
@@ -207,7 +204,6 @@ export default {
         query: { category: this.activeCategory, page: num }
       });
       this.paginationPage = num - 1;
-
       (function smoothscroll() {
         var currentScroll =
           document.documentElement.scrollTop || document.body.scrollTop;
@@ -227,6 +223,9 @@ export default {
   },
   mounted() {
     this.show = !this.show;
+    this.$store.commit("mainContent/changeActiveScreen", {
+      anchor: "articles"
+    });
     this.$store.commit("mainContent/changeMenuBtnColor", "#ffffff");
     document.addEventListener("scroll", () => {
       if (
@@ -316,6 +315,21 @@ export default {
     padding-top: 40px;
     padding-bottom: 1px;
     background-color: $bg-color;
+    position: relative;
+    z-index: 1;
+    background-image: url("~assets/img/collage2.png");
+    background-size: 620px 314px;
+
+    .canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+    }
   }
 
   h1 {
@@ -325,6 +339,8 @@ export default {
     margin-top: 0;
     margin-bottom: 30px;
     text-align: center;
+    position: relative;
+    z-index: 3;
 
     @media screen and (max-width: 1200px) {
       font-size: 54px;
@@ -338,6 +354,8 @@ export default {
     text-align: center;
     margin-top: 0;
     margin-bottom: 40px;
+    position: relative;
+    z-index: 3;
 
     @media screen and (max-width: 1200px) {
       font-size: 26px;
@@ -364,6 +382,9 @@ export default {
   justify-content: center;
   margin-bottom: 50px;
   padding-left: 0;
+  position: relative;
+  z-index: 2;
+  background-color: $white;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -427,6 +448,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  background-color: $white;
 
   @media screen and (max-width: 576px) {
     flex-direction: column;

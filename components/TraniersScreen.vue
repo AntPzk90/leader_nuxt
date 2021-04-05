@@ -6,7 +6,7 @@
     >
       <div class="traniers-screen__wrapper" v-show="show">
         <a
-          v-if="traniers[0].tranier_inst"
+          v-show="traniers[0].tranier_inst"
           :href="`http://instagram.com/_u/${traniers[0].tranier_inst}/`"
           class="traniers-screen__link"
         >
@@ -30,7 +30,7 @@
           </svg>
         </a>
         <a
-          v-if="traniers[0].tranier_tel"
+          v-show="traniers[0].tranier_tel"
           :href="`tel:${traniers[0].tranier_tel}`"
           class="traniers-screen__link traniers-screen__link--tel"
         >
@@ -73,7 +73,7 @@
     >
       <div class="traniers-screen__wrapper" v-show="show">
         <a
-          v-if="traniers[1].tranier_inst"
+          v-show="traniers[1].tranier_inst"
           :href="`https://www.instagram.com/${traniers[1].tranier_inst}/?hl=ru`"
           class="traniers-screen__link"
         >
@@ -97,7 +97,7 @@
           </svg>
         </a>
         <a
-          v-if="traniers[1].tranier_tel"
+          v-show="traniers[1].tranier_tel"
           :href="`tel:${traniers[1].tranier_tel}`"
           class="traniers-screen__link traniers-screen__link--tel"
         >
@@ -140,7 +140,7 @@
     >
       <div class="traniers-screen__wrapper" v-show="show">
         <a
-          v-if="traniers[2].tranier_inst"
+          v-show="traniers[2].tranier_inst"
           :href="`https://www.instagram.com/${traniers[2].tranier_inst}/?hl=ru`"
           class="traniers-screen__link"
         >
@@ -164,7 +164,7 @@
           </svg>
         </a>
         <a
-          v-if="traniers[2].tranier_tel"
+          v-show="traniers[2].tranier_tel"
           :href="`tel:${traniers[2].tranier_tel}`"
           class="traniers-screen__link traniers-screen__link--tel"
         >
@@ -223,7 +223,7 @@ export default {
     this.$store.watch(
       state => state.mainContent.activeScreen,
       () => {
-        this.activeScreen === "page4"
+        this.activeScreen === "traniers"
           ? (this.show = true)
           : (this.show = false);
       }

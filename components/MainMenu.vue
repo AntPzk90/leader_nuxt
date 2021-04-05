@@ -31,49 +31,49 @@
           </NuxtLink>
         </li>
         <li
-          data-menuanchor="page1"
-          :class="{ active: activeScreen == 'page1' }"
+          data-menuanchor="start-screen"
+          :class="{ active: activeScreen == 'start-screen' }"
         >
-          <a @click.prevent="routerPush('#page1')" v-show="!isMainPage"
+          <a @click.prevent="routerPush('#start-screen')" v-show="!isMainPage"
             >Стартовый экран</a
           >
-          <a href="#page1" v-show="isMainPage">Стартовый экран</a>
+          <a href="#start-screen" v-show="isMainPage">Стартовый экран</a>
         </li>
         <li
-          data-menuanchor="page2"
-          :class="{ active: activeScreen == 'page2' }"
+          data-menuanchor="about-us"
+          :class="{ active: activeScreen == 'about-us' }"
         >
-          <a @click.prevent="routerPush('#page2')" v-show="!isMainPage"
+          <a @click.prevent="routerPush('#about-us')" v-show="!isMainPage"
             >О нас</a
           >
-          <a href="#page2" v-show="isMainPage">О нас</a>
+          <a href="#about-us" v-show="isMainPage">О нас</a>
         </li>
         <li
-          data-menuanchor="page3"
-          :class="{ active: activeScreen == 'page3' }"
+          data-menuanchor="gallery"
+          :class="{ active: activeScreen == 'gallery' }"
         >
-          <a @click.prevent="routerPush('#page3')" v-show="!isMainPage"
+          <a @click.prevent="routerPush('#gallery')" v-show="!isMainPage"
             >Галерея</a
           >
-          <a href="#page3" v-show="isMainPage">Галерея</a>
+          <a href="#gallery" v-show="isMainPage">Галерея</a>
         </li>
         <li
-          data-menuanchor="page4"
-          :class="{ active: activeScreen == 'page4' }"
+          data-menuanchor="traniers"
+          :class="{ active: activeScreen == 'traniers' }"
         >
-          <a @click.prevent="routerPush('#page4')" v-show="!isMainPage"
+          <a @click.prevent="routerPush('#traniers')" v-show="!isMainPage"
             >Тренера</a
           >
-          <a href="#page4" v-show="isMainPage">Тренера</a>
+          <a href="#traniers" v-show="isMainPage">Тренера</a>
         </li>
         <li
-          data-menuanchor="page5"
-          :class="{ active: activeScreen == 'page5' }"
+          data-menuanchor="contacts"
+          :class="{ active: activeScreen == 'contacts' }"
         >
-          <a @click.prevent="routerPush('#page5')" v-show="!isMainPage"
+          <a @click.prevent="routerPush('#contacts')" v-show="!isMainPage"
             >Контакты</a
           >
-          <a href="#page5" v-show="isMainPage">Контакты</a>
+          <a href="#contacts" v-show="isMainPage">Контакты</a>
         </li>
         <li :class="{ active: activeScreen === 'articles' }">
           <NuxtLink :to="{ name: 'articles' }">Блог</NuxtLink>
@@ -256,6 +256,10 @@ input[type="checkbox"]:checked ~ span:nth-of-type(3) {
     color: $white;
     text-decoration: none;
     cursor: pointer;
+
+    &:active {
+      opacity: 0.7;
+    }
 
     @media screen and (max-width: 1366px) {
       font-size: 4vh;

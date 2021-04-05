@@ -52,7 +52,6 @@ export default {
   computed: {
     slicedContent() {
       if (this.content) {
-        console.log();
         return `${this.content.slice(0, 155)}...`;
       }
       return "";

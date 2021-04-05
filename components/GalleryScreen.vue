@@ -82,7 +82,7 @@ export default {
     this.$store.watch(
       state => state.mainContent.activeScreen,
       () => {
-        this.activeScreen === "page3"
+        this.activeScreen === "gallery"
           ? (this.show = true)
           : (this.show = false);
         this.isShowFullPhoto ? (this.isShowFullPhoto = false) : "";

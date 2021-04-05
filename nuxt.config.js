@@ -3,7 +3,7 @@ export default {
   head: {
     title: "Бк Лидер",
     htmlAttrs: {
-      lang: "en"
+      lang: "ru"
     },
     meta: [
       { charset: "utf-8" },
@@ -64,5 +64,5 @@ export default {
     css: true
   },
   ssr: true,
-  target: "static"
+  target: "server"
 };

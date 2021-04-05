@@ -2,7 +2,6 @@
   <div class="start-screen__main-wrapper">
     <div
       class="start-screen"
-      v-if="isLoadedData"
       :style="{ 'background-image': 'url(' + bgImage + ')' }"
     >
       <div class="start-screen__content">
@@ -47,13 +46,13 @@ export default {
   },
   mounted() {
     this.$store.commit("mainContent/changeActiveScreen", {
-      anchor: "page1"
+      anchor: "start-screen"
     });
     this.show = true;
     this.$store.watch(
       state => state.mainContent.activeScreen,
       () => {
-        this.activeScreen === "page1"
+        this.activeScreen === "start-screen"
           ? (this.show = true)
           : (this.show = false);
       }

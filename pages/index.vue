@@ -41,9 +41,12 @@ export default {
     AppTraniersScreen,
     AppContactsScreen
   },
-  async asyncData({ store, error, redirect }) {
+  async asyncData({ store }) {
     await store.dispatch("mainContent/getMainContentAction", {
       apiUrl: "/posts/76"
+    });
+    await store.dispatch("blog/getBlogMetaAction", {
+      apiUrl: "/posts/177"
     });
     await store.dispatch("blog/getArticlesAction", {
       apiUrl: "articles/?per_page=100"
@@ -69,25 +72,30 @@ export default {
     options() {
       return {
         menu: "#menu",
-        anchors: ["page1", "page2", "page3", "page4", "page5"],
-        sectionsColor: ["red", "#ff5f45", "#0798ec"],
+        anchors: [
+          "start-screen",
+          "about-us",
+          "gallery",
+          "traniers",
+          "contacts"
+        ],
         licenseKey: "",
         onLeave: (origin, destination, direction) => {
           this.$store.commit("mainContent/changeActiveScreen", destination);
           switch (destination.anchor) {
-            case "page1":
+            case "start-screen":
               this.$store.commit("mainContent/changeMenuBtnColor", "#ffffff");
               break;
-            case "page2":
+            case "about-us":
               this.$store.commit("mainContent/changeMenuBtnColor", "#ffffff");
               break;
-            case "page3":
+            case "gallery":
               this.$store.commit("mainContent/changeMenuBtnColor", "crimson");
               break;
-            case "page4":
+            case "traniers":
               this.$store.commit("mainContent/changeMenuBtnColor", "crimson");
               break;
-            case "page5":
+            case "contacts":
               this.$store.commit("mainContent/changeMenuBtnColor", "#ffffff");
               break;
             default:
