@@ -1,13 +1,6 @@
 <template>
   <div>
     <div class="video-wrapper">
-      <video
-        ref="video"
-        src="@/assets/video/tranier.mp4"
-        autoplay="true"
-        loop="true"
-        muted
-      ></video>
       <div class="loader">
         <div class="cssload-dots">
           <div class="cssload-dot"></div>

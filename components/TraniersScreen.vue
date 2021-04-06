@@ -4,7 +4,7 @@
       enter-active-class="bounceInLeft"
       leave-active-class="bounceOutLeft"
     >
-      <div class="traniers-screen__wrapper" v-show="show">
+      <div class="traniers-screen__wrapper" v-show="show" v-if="traniers[0]">
         <a
           v-show="traniers[0].tranier_inst"
           :href="`http://instagram.com/_u/${traniers[0].tranier_inst}/`"
@@ -71,7 +71,7 @@
       enter-active-class="bounceInDown"
       leave-active-class="bounceOutDown"
     >
-      <div class="traniers-screen__wrapper" v-show="show">
+      <div class="traniers-screen__wrapper" v-show="show" v-if="traniers[1]">
         <a
           v-show="traniers[1].tranier_inst"
           :href="`https://www.instagram.com/${traniers[1].tranier_inst}/?hl=ru`"
@@ -138,7 +138,7 @@
       enter-active-class="bounceInRight"
       leave-active-class="bounceOutRight"
     >
-      <div class="traniers-screen__wrapper" v-show="show">
+      <div class="traniers-screen__wrapper" v-show="show" v-if="traniers[2]">
         <a
           v-show="traniers[2].tranier_inst"
           :href="`https://www.instagram.com/${traniers[2].tranier_inst}/?hl=ru`"
@@ -239,6 +239,7 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-image: url("~assets/img/collage3.jpg");
 
   @media screen and (max-width: 1024px) {
     flex-direction: column;
