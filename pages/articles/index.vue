@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="articles">
     <AppMainMenu />
     <div class="articles-page">
       <div class="articles-page__top">
@@ -7,13 +7,13 @@
           enter-active-class="bounceInUp"
           leave-active-class="bounceOutUp"
         >
-          <h1 v-show="show">Блог</h1>
+          <h1 v-if="show">Блог</h1>
         </transition>
         <transition
           enter-active-class="bounceInDown"
           leave-active-class="bounceOutDown"
         >
-          <p class="articles-page__slogan" v-show="show">
+          <p class="articles-page__slogan" v-if="show">
             Всё самое интересное для боксёров, собрано здесь.
           </p>
         </transition>
@@ -24,7 +24,7 @@
             enter-active-class="bounceInLeft"
             leave-active-class="bounceOutLeft"
           >
-            <ul class="breadcrumbs breadcrumbs--articles-page" v-show="show">
+            <ul class="breadcrumbs breadcrumbs--articles-page" v-if="show">
               <li><NuxtLink :to="{ path: '/' }">Главная</NuxtLink></li>
               <li>блог</li>
             </ul>
@@ -72,7 +72,7 @@
 
         <transition-group
           class="articles-page__categories-list"
-          v-show="show && showCategories"
+          v-if="show && showCategories"
           enter-active-class="bounceInRight"
           leave-active-class="bounceOutLeft"
           appear
@@ -108,7 +108,7 @@
           ></AppArticlePreview>
         </transition-group>
         <AppPaginate
-          v-show="showPaginate"
+          v-if="showPaginate"
           :page-count="pageCount"
           :initial-page="initialPage"
           @clickOnPaginateLink="changePaginationPage"
@@ -148,28 +148,8 @@ export default {
     };
   },
   async asyncData({ store, error }) {
-    await store.dispatch("mainContent/getMainContentAction", {
-      apiUrl: "/posts/76"
-    });
     await store.dispatch("blog/getBlogMetaAction", {
       apiUrl: "/posts/177"
-    });
-    await store.dispatch("blog/getArticlesAction", {
-      apiUrl: "articles/?per_page=100"
-    });
-  },
-  async fetch() {
-    await this.$nuxt.context.store.dispatch(
-      "mainContent/getMainContentAction",
-      {
-        apiUrl: "/posts/76"
-      }
-    );
-    await this.$nuxt.context.store.dispatch("blog/getBlogMetaAction", {
-      apiUrl: "/posts/177"
-    });
-    await this.$nuxt.context.store.dispatch("blog/getArticlesAction", {
-      apiUrl: "articles/?per_page=100"
     });
   },
   data() {
@@ -237,6 +217,15 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch("mainContent/getMainContentAction", {
+      apiUrl: "/posts/76"
+    });
+    this.$store.dispatch("blog/getBlogMetaAction", {
+      apiUrl: "/posts/177"
+    });
+    this.$store.dispatch("blog/getArticlesAction", {
+      apiUrl: "articles/?per_page=100"
+    });
     this.show = !this.show;
     this.$store.commit("mainContent/changeActiveScreen", {
       anchor: "articles"
