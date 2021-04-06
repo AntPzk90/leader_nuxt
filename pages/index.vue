@@ -41,17 +41,14 @@ export default {
     AppTraniersScreen,
     AppContactsScreen
   },
-  async fetch() {
-    await this.$nuxt.context.store.dispatch(
-      "mainContent/getMainContentAction",
-      {
-        apiUrl: "/posts/76"
-      }
-    );
-    await this.$nuxt.context.store.dispatch("blog/getBlogMetaAction", {
+  async asyncData({ store }) {
+    await store.dispatch("mainContent/getMainContentAction", {
+      apiUrl: "/posts/76"
+    });
+    await store.dispatch("blog/getBlogMetaAction", {
       apiUrl: "/posts/177"
     });
-    await this.$nuxt.context.store.dispatch("blog/getArticlesAction", {
+    await store.dispatch("blog/getArticlesAction", {
       apiUrl: "articles/?per_page=100"
     });
   },
